@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace MikkoTest\Factory;
 
@@ -15,6 +16,6 @@ class OutputterFactory
             return new ConsoleOutputter();
         }
 
-        return new CsvOutputter();
+        return new CsvOutputter($input->getOption('filename'));
     }
 }
