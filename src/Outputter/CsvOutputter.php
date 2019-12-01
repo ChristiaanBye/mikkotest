@@ -20,7 +20,7 @@ class CsvOutputter implements OutputterInterface
         $this->fileName = $fileName;
     }
 
-    public function execute(array $paymentDates, OutputInterface $output): void
+    public function execute(array $paymentDates, OutputInterface $output): int
     {
         // TODO: Implement execute() method.
     }
