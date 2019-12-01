@@ -9,7 +9,7 @@ use Symfony\Component\Console\Input\InputInterface;
 
 class OutputterFactory
 {
-    public function createOutputter(InputInterface $input): OutputterInterface
+    public static function createOutputter(InputInterface $input): OutputterInterface
     {
         if ($input->getOption('dry-run') === true) {
             return new ConsoleOutputter();

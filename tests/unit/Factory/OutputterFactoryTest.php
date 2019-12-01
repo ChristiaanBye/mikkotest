@@ -14,8 +14,7 @@ class OutputterFactoryTest extends TestCase
     {
         $mockedInput = $this->createMockedInput(true);
 
-        $outputterFactory = new OutputterFactory();
-        $actualObject = $outputterFactory->createOutputter($mockedInput);
+        $actualObject = OutputterFactory::createOutputter($mockedInput);
 
         $this->assertInstanceOf(ConsoleOutputter::class, $actualObject);
     }
@@ -24,8 +23,7 @@ class OutputterFactoryTest extends TestCase
     {
         $mockedInput = $this->createMockedInput(null);
 
-        $outputterFactory = new OutputterFactory();
-        $actualObject = $outputterFactory->createOutputter($mockedInput);
+        $actualObject = OutputterFactory::createOutputter($mockedInput);
 
         $this->assertInstanceOf(CsvOutputter::class, $actualObject);
     }

@@ -16,8 +16,7 @@ class PaymentDatesFactoryTest extends TestCase
         // Let's return to June in 1999 for this test
         Carbon::setTestNow(Carbon::create(1999, 6, 15));
 
-        $factory  = new PaymentDatesFactory();
-        $paymentDates = $factory->createPaymentDates(null);
+        $paymentDates = PaymentDatesFactory::createPaymentDates(null);
 
         $expectedResult = array(
             new PaymentDates(new Month(6),  new Year('1999')),
@@ -37,8 +36,7 @@ class PaymentDatesFactoryTest extends TestCase
 
     public function test_createPaymentDates_generatesPaymentDatesObjectsForFullYear_ifAYearIsPassed()
     {
-        $factory  = new PaymentDatesFactory();
-        $paymentDates = $factory->createPaymentDates('2021');
+        $paymentDates = PaymentDatesFactory::createPaymentDates('2021');
 
         $expectedResult = array(
             new PaymentDates(new Month(1),  new Year('2021')),
