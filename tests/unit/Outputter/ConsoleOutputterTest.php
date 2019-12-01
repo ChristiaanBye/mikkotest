@@ -32,9 +32,6 @@ class ConsoleOutputterTest extends TestCase
 
         $actualExitCode = $consoleOutputter->execute($paymentDates, $mockedOutputInterface);
 
-        $this->assertSame(
-            0,
-            $actualExitCode
-        );
+        $this->assertSame(0, $actualExitCode);
     }
 }

@@ -16,6 +16,6 @@ class OutputterFactory
             return new ConsoleOutputter();
         }
 
-        return new CsvOutputter($input->getOption('filename'));
+        return new CsvOutputter(CsvOutputter::DEFAULT_OUTPUT_DIRECTORY, $input->getOption('filename'));
     }
 }
