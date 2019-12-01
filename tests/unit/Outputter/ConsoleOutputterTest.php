@@ -30,11 +30,11 @@ class ConsoleOutputterTest extends TestCase
             new PaymentDates(new Month(12), new Year('2010'))
         );
 
-        $actualReturnValue = $consoleOutputter->execute($paymentDates, $mockedOutputInterface);
+        $actualExitCode = $consoleOutputter->execute($paymentDates, $mockedOutputInterface);
 
         $this->assertSame(
             0,
-            $actualReturnValue
+            $actualExitCode
         );
     }
 }
