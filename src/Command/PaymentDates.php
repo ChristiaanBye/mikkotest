@@ -35,9 +35,8 @@ class PaymentDates extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $paymentDates = PaymentDatesFactory::createPaymentDates($input->getOption('year'));
-
-        $outputter = OutputterFactory::createOutputter($input);
+        $paymentDates = PaymentDatesFactory::createPaymentDates($input);
+        $outputter    = OutputterFactory::createOutputter($input);
 
         return $outputter->execute($paymentDates, $output);
     }

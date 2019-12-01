@@ -7,7 +7,9 @@ use Carbon\Carbon;
 use MikkoTest\ValueObject\Month;
 use MikkoTest\ValueObject\PaymentDates;
 use MikkoTest\ValueObject\Year;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\Console\Input\InputInterface;
 
 class PaymentDatesFactoryTest extends TestCase
 {
@@ -16,7 +18,9 @@ class PaymentDatesFactoryTest extends TestCase
         // Let's return to June in 1999 for this test
         Carbon::setTestNow(Carbon::create(1999, 6, 15));
 
-        $paymentDates = PaymentDatesFactory::createPaymentDates(null);
+        $mockedInput = $this->createMockedInput(null);
+
+        $paymentDates = PaymentDatesFactory::createPaymentDates($mockedInput);
 
         $expectedResult = array(
             new PaymentDates(new Month(6),  new Year('1999')),
@@ -36,7 +40,9 @@ class PaymentDatesFactoryTest extends TestCase
 
     public function test_createPaymentDates_generatesPaymentDatesObjectsForFullYear_ifAYearIsPassed()
     {
-        $paymentDates = PaymentDatesFactory::createPaymentDates('2021');
+        $mockedInput = $this->createMockedInput('2021');
+
+        $paymentDates = PaymentDatesFactory::createPaymentDates($mockedInput);
 
         $expectedResult = array(
             new PaymentDates(new Month(1),  new Year('2021')),
@@ -54,5 +60,21 @@ class PaymentDatesFactoryTest extends TestCase
         );
 
         $this->assertEquals($expectedResult, $paymentDates);
+    }
+
+    /**
+     * @param string|null $returnValue
+     *
+     * @return MockObject|InputInterface
+     */
+    private function createMockedInput(?string $returnValue): MockObject
+    {
+        $mockedInput = $this->createMock(InputInterface::class);
+        $mockedInput->expects($this->once())
+            ->method('getOption')
+            ->with('year')
+            ->willReturn($returnValue);
+
+        return $mockedInput;
     }
 }
