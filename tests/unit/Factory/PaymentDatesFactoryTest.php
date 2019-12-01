@@ -11,13 +11,13 @@ use PHPUnit\Framework\TestCase;
 
 class PaymentDatesFactoryTest extends TestCase
 {
-    public function test_generatePaymentDates_generatesPaymentDatesObjectsForRemainderOfCurrentYear_ifNullIsPassed()
+    public function test_createPaymentDates_generatesPaymentDatesObjectsForRemainderOfCurrentYear_ifNullIsPassed()
     {
         // Let's return to June in 1999 for this test
         Carbon::setTestNow(Carbon::create(1999, 6, 15));
 
         $factory  = new PaymentDatesFactory();
-        $paymentDates = $factory->generatePaymentDates(null);
+        $paymentDates = $factory->createPaymentDates(null);
 
         $expectedResult = array(
             new PaymentDates(new Month(6),  new Year('1999')),
@@ -35,10 +35,10 @@ class PaymentDatesFactoryTest extends TestCase
         Carbon::setTestNow();
     }
 
-    public function test_generatePaymentDates_generatesPaymentDatesObjectsForFullYear_ifAYearIsPassed()
+    public function test_createPaymentDates_generatesPaymentDatesObjectsForFullYear_ifAYearIsPassed()
     {
         $factory  = new PaymentDatesFactory();
-        $paymentDates = $factory->generatePaymentDates('2021');
+        $paymentDates = $factory->createPaymentDates('2021');
 
         $expectedResult = array(
             new PaymentDates(new Month(1),  new Year('2021')),

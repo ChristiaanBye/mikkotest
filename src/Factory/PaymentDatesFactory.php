@@ -15,7 +15,7 @@ class PaymentDatesFactory
      *
      * @return array
      */
-    public function generatePaymentDates(?string $year): array
+    public function createPaymentDates(?string $year): array
     {
         $payments      = array();
         $startingMonth = 1;
