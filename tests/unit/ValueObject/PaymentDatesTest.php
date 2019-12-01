@@ -22,6 +22,7 @@ class PaymentDatesTest extends TestCase
 
     /**
      * @dataProvider dataProvider_basePaymentDates
+     * @small Improper modifications may cause an infinite loop in this method, limit the execution time to one second
      */
     public function test_getBasePaymentDate_returnsBasePaymentDate(Month $month, Year $year, \DateTimeImmutable $expectedValue)
     {
@@ -32,6 +33,7 @@ class PaymentDatesTest extends TestCase
 
     /**
      * @dataProvider dataProvider_bonusPaymentDates
+     * @small Improper modifications may cause an infinite loop in this method, limit the execution time to one second
      */
     public function test_getBonusPaymentDate_returnsBonusPaymentDate(Month $month, Year $year, \DateTimeImmutable $expectedValue)
     {

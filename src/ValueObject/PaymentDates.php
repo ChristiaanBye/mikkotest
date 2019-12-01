@@ -26,7 +26,7 @@ class PaymentDates
      */
     public function getFullTextMonth(): string
     {
-
+        return $this->month->getFullTextMonth();
     }
 
     /**
@@ -37,10 +37,21 @@ class PaymentDates
      * weekday in these cases.
      *
      * @return \DateTimeImmutable
+     * @throws \Exception
      */
     public function getBasePaymentDate(): \DateTimeImmutable
     {
+        $paymentDate = new \DateTime(
+            $this->year->getYearNumber() . '-' .
+            $this->month->getNumericMonth() . '-' .
+            $this->getLastDayOfMonth($this->month, $this->year->getYearNumber())
+        );
 
+        while ($this->isWeekend($paymentDate)) {
+            $paymentDate->sub(new \DateInterval('P1D'));
+        }
+
+        return \DateTimeImmutable::createFromMutable($paymentDate);
     }
 
     /**
@@ -48,9 +59,70 @@ class PaymentDates
      * previous month, unless that day is a weekend. In that case, they are paid the first Wednesday after the 15th."
      *
      * @return \DateTimeImmutable
+     * @throws \Exception
      */
     public function getBonusPaymentDate(): \DateTimeImmutable
     {
+        $paymentDate = new \DateTime(
+            $this->year->getYearNumber() . '-' .
+            $this->month->getNumericMonth() . '-' .
+            15
+        );
 
+        $paymentDate->add(new \DateInterval('P1M'));
+
+        if ($this->isWeekend($paymentDate)) {
+            while (!$this->isWednesday($paymentDate)) {
+                $paymentDate->add(new \DateInterval('P1D'));
+            }
+        }
+
+        return \DateTimeImmutable::createFromMutable($paymentDate);
+    }
+
+    /**
+     * @param \DateTime $dateTime
+     *
+     * @return bool
+     */
+    private function isWednesday(\DateTime $dateTime): bool
+    {
+        if ((int)$dateTime->format('N') === 3) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * @param \DateTime $dateTime
+     *
+     * @return bool
+     */
+    private function isWeekend(\DateTime $dateTime): bool
+    {
+        if ((int)$dateTime->format('N') > 5) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * @param Month $month
+     * @param int   $year
+     *
+     * @return int
+     * @throws \Exception
+     */
+    private function getLastDayOfMonth(Month $month, int $year): int
+    {
+        $dateTime = new \DateTime(
+            $year . '-' .
+            $month->getNumericMonth() . '-' .
+            1
+        );
+
+        return (int)$dateTime->format('t');
     }
 }

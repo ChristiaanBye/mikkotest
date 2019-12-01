@@ -28,11 +28,7 @@ class YearTest extends TestCase
     {
         $year = new Year('2015');
 
-        $yearNumberProperty = new \ReflectionProperty(Year::class, 'yearNumber');
-        $yearNumberProperty->setAccessible(true);
-        $actualValue = $yearNumberProperty->getValue($year);
-
-        $this->assertSame(2015, $actualValue);
+        $this->assertSame(2015, $year->getYearNumber());
     }
 
     public function test_constructor_throwsInvalidYearException_ifProvidedYearIsNotValid()

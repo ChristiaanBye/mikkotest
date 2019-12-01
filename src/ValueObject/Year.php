@@ -28,6 +28,11 @@ class Year
         $this->yearNumber = (int)$year;
     }
 
+    public function getYearNumber(): int
+    {
+        return $this->yearNumber;
+    }
+
     private function yearMustBeAValidYear(string $year)
     {
         // If we can create a DateTime object with the provided year, it must be valid
