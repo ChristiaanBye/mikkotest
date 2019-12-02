@@ -8,7 +8,7 @@ use MikkoTest\Exception\InvalidMonthException;
 class Month
 {
     /**
-     * @var Month
+     * @var int
      */
     private $month;
 

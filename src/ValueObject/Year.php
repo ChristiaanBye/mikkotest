@@ -17,8 +17,7 @@ class Year
      */
     public function __construct(
         ?string $year // string as the value provided from the argument will be a string
-    )
-    {
+    ) {
         if ($year === null) {
             $year = Carbon::now()->format('Y');
         }
