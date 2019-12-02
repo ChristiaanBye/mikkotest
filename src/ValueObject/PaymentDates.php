@@ -33,8 +33,8 @@ class PaymentDates
      * Returns the base payment date by using the following rule: "The base salaries are paid on the last day of the
      * month unless that day is a Saturday or a Sunday (weekend).
      *
-     * As the specification doesn't state what should happen if the last day is on the weekend, I have assumed the last
-     * weekday in these cases.
+     * In the flowchart it states that when the last day of the month is a Saturday or Sunday the payment is made on the
+     * last weekday of the month instead.
      *
      * @return \DateTimeImmutable
      * @throws \Exception
