@@ -101,7 +101,7 @@ class CsvOutputterTest extends TestCase
     {
         return array(
             'nullAsFileName'        => array(null),
-            'emptyStringAsFileName' => array(null)
+            'emptyStringAsFileName' => array("")
         );
     }
 }
