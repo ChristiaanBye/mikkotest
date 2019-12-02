@@ -9,6 +9,7 @@
         executionOrder="random"
         verbose="true"
         enforceTimeLimit="true"
+        defaultTestSuite="Unit"
 >
 
     <testsuites>
