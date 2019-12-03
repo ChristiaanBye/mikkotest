@@ -51,6 +51,8 @@ After setting up the Docker container, please follow the following steps.
     ```
     The value passed for the flag `-f` is the name of the outputted file and can be changed at own discretion.
 
+    The generated file can be found in the `output` folder in the working directory.
+
 ## Extras
 ### Generating output for a given year
 As the CLI tool was delivered in December, a single row will be outputted upon execution. Therefore an extra option `-y` was added in order to generate payment dates for a full year of the user's choice. For example, in order to generate the payment dates for 2020, the user would execute:
